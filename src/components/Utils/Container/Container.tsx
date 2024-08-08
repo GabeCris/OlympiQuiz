@@ -1,13 +1,14 @@
 import { ReactNode } from 'react'
 import * as S from "./styles.ts"
 
-interface ContainerProps {
+export interface ContainerProps {
     children: ReactNode
+    isGame?: boolean
 }
 
-const Container = ({ children }: ContainerProps) => {
+const Container = ({ children, isGame}: ContainerProps) => {
     return (
-        <S.Container>
+        <S.Container isGame={isGame}>
             {children}
         </S.Container>
     )

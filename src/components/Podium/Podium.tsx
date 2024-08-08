@@ -21,23 +21,23 @@ const Podium = ({ data }: PodiumProps) => {
       {podiumCountries.map((country) => (
         <S.Position>
           <S.Country>
-            <Flag src={country.flag_url}/>
-            <Text fontSize={Font.EXTRA_SMALL}>{country.name}</Text>
+            <Flag src={country?.flag_url}/>
+            <Text fontSize={Font.EXTRA_SMALL}>{country?.name}</Text>
           </S.Country>
           <S.Standard>
             <Medal.Root type="gold" location="podium">
               <Medal.Icon />
-              <Medal.Text>{country.gold_medals}</Medal.Text>
+              <Medal.Text>{country?.gold_medals}</Medal.Text>
             </Medal.Root>
 
             <Medal.Root type="silver" location="podium">
               <Medal.Icon />
-              <Medal.Text>{country.silver_medals}</Medal.Text>
+              <Medal.Text>{country?.silver_medals}</Medal.Text>
             </Medal.Root>
 
             <Medal.Root type="brass" location="podium">
               <Medal.Icon />
-              <Medal.Text>{country.bronze_medals}</Medal.Text>
+              <Medal.Text>{country?.bronze_medals}</Medal.Text>
             </Medal.Root>
           </S.Standard>
         </S.Position>

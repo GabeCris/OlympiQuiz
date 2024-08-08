@@ -1,20 +1,26 @@
 import React, { useEffect, useState } from "react";
 import * as S from "./styles";
-import { BackIcon, OlympicIconWhite, RocketIcon } from "../Icons";
+import {
+  BackIcon,
+  MedalsIcon,
+  OlympicIconWhite,
+  RocketIcon,
+  TrophyIcon,
+} from "../Icons";
 import Text from "../Utils/Text";
 import { Color, Font } from "@src/types/types";
 import Flag from "../Flag";
 import { useGameContext } from "@src/context/GameContext/GameContext";
 import Nationality from "./Nationality";
 import Score from "./Score";
+import { useNavigate } from "react-router-dom";
+import Medal from "./Medal";
 const Question = () => {
-  const { question, questionIndex, startTimer, timerStatus } = useGameContext();
+  const { question, questionIndex, startTimer, timerStatus, recordScore } =
+    useGameContext();
+  const navigate = useNavigate();
 
-  const { sport, type, gender } = question;
-
-  useEffect(() => {
-    console.log(timerStatus, "TIMER STATUS")
-  }, [timerStatus]);
+  const { sport, type, gender, pictogram } = question;
 
   const formatQuestion = () => {
     switch (type) {
@@ -22,6 +28,8 @@ const Question = () => {
         return <Nationality />;
       case "score":
         return <Score />;
+      case "medal":
+        return <Medal />;
       default:
         return "";
     }
@@ -30,7 +38,11 @@ const Question = () => {
   return (
     <S.Container>
       <S.Header>
-        <BackIcon />
+        <BackIcon
+          style={{ cursor: "pointer" }}
+          width={40}
+          onClick={() => navigate("/")}
+        />
         <Text
           isTitle
           color={Color.WHITE}
@@ -43,9 +55,15 @@ const Question = () => {
       </S.Header>
 
       <S.Content>
+        <S.Record>
+          <TrophyIcon color={Color.YELLOW} />
+          <Text color={Color.YELLOW} fontSize={Font.MEDIUM}>
+            {recordScore}
+          </Text>
+        </S.Record>
         <S.Timer>
           <S.TimerIcon>
-            <RocketIcon color={Color.RED} />
+            {pictogram ? <img src={pictogram} alt="" /> : <MedalsIcon />}
           </S.TimerIcon>
           <S.RingTimer>
             <S.Svg>
@@ -61,11 +79,11 @@ const Question = () => {
         </S.Timer>
 
         <S.Sport>
-          <Text isTitle color={Color.RED} fontSize={Font.MEDIUM}>
+          <Text isTitle color={Color.BLUE} fontSize={Font.MEDIUM}>
             {sport}
           </Text>
           <Text
-            color={Color.RED}
+            color={Color.BLUE}
             fontSize={Font.EXTRA_SMALL}
             fontWeight="regular"
           >

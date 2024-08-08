@@ -66,7 +66,7 @@ export const ringTimer = keyframes`
 export const RingTimer = styled.div`
   --ring-size: 54;
   --ring-stroke-width: 8;
-  --ring-color: ${colors.red};
+  --ring-color: ${colors.blue};
   width: calc(1px * var(--ring-size));
   height: calc(1px * var(--ring-size));
   position: relative;
@@ -92,7 +92,7 @@ export const Circle = styled.circle<{ timer: TimerProps }>`
   stroke: var(--ring-color);
   stroke-dasharray: ${ringPerimeter}; // Ajustado para o comprimento total do perímetro
   stroke-dashoffset: ${ringPerimeter}; // Começa completamente preenchido
-  animation: ${ringTimer} 5s linear;
+  animation: ${ringTimer} 10s linear;
   animation-play-state: ${(props) => props.timer.status};
 
   animation-name: ${(props) =>
@@ -106,6 +106,14 @@ export const TimerIcon = styled.div`
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: 85%;
+    height: 85%;
+  }
 `;
 
 export const Sport = styled.div`
@@ -115,18 +123,11 @@ export const Sport = styled.div`
   flex-direction: column;
 `;
 
-export const Question = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: ${spacing.small};
-`;
-
-export const Duel = styled.div`
+export const Medals = styled.div`
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  gap: ${spacing.large};
+  align-items: center;
+  gap: ${spacing.medium};
 `;
 
 export const Country = styled.div`
@@ -140,4 +141,35 @@ export const Country = styled.div`
   p {
     line-height: 12px;
   }
+`;
+
+export const Question = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: ${spacing.small};
+
+  &:has(${Medals}) {
+    ${Country} {
+      width: 80px;
+    }
+    gap: ${spacing.medium};
+  }
+`;
+
+export const Duel = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: ${spacing.large};
+`;
+
+export const Record = styled.div`
+  display: flex;
+  align-items: center;
+  gap: ${spacing.extra_small};
+  margin: 6px 6px 0 0;
+  top: 10px;
+  right: 10px;
+  position: absolute;
 `;

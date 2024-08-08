@@ -10,3 +10,4 @@ export { default as CheckIcon } from "./CheckIcon";
 export { default as UncheckIcon } from "./UncheckIcon";
 export { default as WrongIcon } from "./WrongIcon";
 export { default as ConfirmIcon } from "./ConfirmIcon";
+export { default as MedalsIcon } from "./MedalsIcon";

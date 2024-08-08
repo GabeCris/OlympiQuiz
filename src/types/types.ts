@@ -79,10 +79,11 @@ export interface CardProps {
   navigateTo?: string;
   color?: Color;
   action?: () => void;
+  help?: () => void;
   icon?: ReactNode;
   title: string;
   subtitle: string;
-  record?: number;
+  record?: boolean;
 }
 
 export enum IconAnswerType {

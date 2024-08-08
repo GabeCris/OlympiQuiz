@@ -29,6 +29,12 @@ export const theme = {
     large: "20px",
   },
 
+  breakpoints: {
+    mobile: "480px",
+    tablet: "768px",
+    desktop: "990px",
+  },
+
   radius: "12px",
   opacity: "0.5",
 };

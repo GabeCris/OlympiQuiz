@@ -7,7 +7,6 @@ const Header = () => {
       <S.Header>
         <OlympiQuizIcon />
         <OlympicIcon/>
-        
         <S.Bottom>
           <S.Rect/>
           <S.Rect/>

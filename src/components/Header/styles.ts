@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { theme } from "@src/styles/theme";
+import { radius } from "../Question/styles";
 
-const { colors, spacing } = theme;
+const { colors, spacing, breakpoints } = theme;
 
 export const Header = styled.header`
   display: flex;
@@ -16,6 +17,11 @@ export const Header = styled.header`
   position: sticky;
   top: 0;
   z-index: 999;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    border-radius: ${radius};
+    overflow: hidden;
+  }
 `;
 
 export const Bottom = styled.div`

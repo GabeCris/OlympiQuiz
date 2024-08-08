@@ -24,8 +24,6 @@ export const Card = styled.div<CardProps>`
   border-radius: ${radius};
   gap: ${spacing.small};
 
-  pointer-events: none;
-
   button,
   ${Icon} {
     background-color: ${(props) => props.color ?? colors.red};

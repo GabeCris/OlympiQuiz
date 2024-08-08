@@ -5,7 +5,7 @@ import { Font } from "@src/types/types";
 import * as S from "./styles";
 import Actions from "../Actions";
 import { useGameContext } from "@src/context/GameContext/GameContext";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Answers = () => {
   const optionsLetters = ["A", "B", "C", "D"];
@@ -13,19 +13,20 @@ const Answers = () => {
     generateRandomQuestion,
     question,
     selectedOption,
-    setSelectedOption,
     nextQuestion,
     timerStatus,
     gameStatus,
+    resetGameData,
   } = useGameContext();
   const { options, correctAnswer } = question;
+  const navigate = useNavigate();
 
   const { status } = timerStatus;
 
   const handleButtonClick = () => {
     switch (gameStatus) {
       case "finished":
-        console.log("ACABOU");
+        resetGameData();
         break;
       case "active":
         nextQuestion();
@@ -39,7 +40,7 @@ const Answers = () => {
     ) : (
       <Button.Root extended onClick={handleButtonClick}>
         <Button.Text fontSize={Font.LARGE} fontWeight="bold">
-          Próximo
+          {gameStatus === "finished" ? "Jogar Novamente" : "Próximo"}
         </Button.Text>
       </Button.Root>
     );
@@ -47,15 +48,16 @@ const Answers = () => {
 
   return (
     <>
-      {options?.map((option, index) => (
-        <Answer
-          index={optionsLetters[index]}
-          option={option}
-          selected={selectedOption}
-          action={setSelectedOption}
-          correctAnswer={correctAnswer}
-        />
-      ))}
+      <S.Container>
+        {options?.map((option, index) => (
+          <Answer
+            index={optionsLetters[index]}
+            option={option}
+            selected={selectedOption}
+            correctAnswer={correctAnswer}
+          />
+        ))}
+      </S.Container>
       {changeActionButtons}
     </>
   );

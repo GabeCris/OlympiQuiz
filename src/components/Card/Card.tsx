@@ -3,12 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { CardProps, Color, Font } from "@src/types/types";
 import Text from "../Utils/Text";
 import { TrophyIcon } from "../Icons";
-import { useState } from "react";
+import { act, useState } from "react";
 import { Button } from "../Button";
+import { useGameContext } from "@src/context/GameContext/GameContext";
 
 const Card = ({
-  navigateTo,
   action,
+  help,
   color,
   icon,
   title,
@@ -19,15 +20,23 @@ const Card = ({
   const navigate = useNavigate();
 
   const [showButtons, setShowButtons] = useState(false);
+  const { resetGameData, recordScore } = useGameContext();
 
   const handleClick = () => {
-    setShowButtons(!showButtons);
+    if (action) action();
+    else setShowButtons(!showButtons);
+  };
+
+  const handleToast = (e) => {
+    e.stopPropagation();
+    help();
   };
 
   const handleNavigate = (e) => {
-    e.stopPropagation()
-    navigate('/game/diary')
-  }
+    e.stopPropagation();
+    resetGameData();
+    navigate("/game/diary");
+  };
 
   return (
     <S.Card onClick={handleClick} color={color} {...props}>
@@ -35,10 +44,10 @@ const Card = ({
 
       {showButtons ? (
         <S.Buttons>
-          <S.Help>
+          <S.Help onClick={(e) => handleToast(e)}>
             <Text color={color}>?</Text>
           </S.Help>
-          <Button.Root onClick={(e)=> handleNavigate(e)}>
+          <Button.Root onClick={(e) => handleNavigate(e)}>
             <Button.Text>Jogar</Button.Text>
           </Button.Root>
         </S.Buttons>
@@ -55,7 +64,7 @@ const Card = ({
             <S.Record>
               <TrophyIcon color={Color.YELLOW} />
               <Text color={Color.YELLOW} fontSize={Font.MEDIUM}>
-                {record}
+                {recordScore}
               </Text>
             </S.Record>
           )}

@@ -9,7 +9,7 @@ const Game = () => {
   const { text, options } = question;
 
   return (
-    <Container>
+    <Container isGame>
       <Question />
       <Answers options={options} />
     </Container>

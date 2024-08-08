@@ -7,6 +7,6 @@ export interface MedalChildrenProps {
 export type MedalTypeProps = "gold" | "silver" | "brass";
 
 export interface MedalProps extends MedalChildrenProps {
-  location?: "podium" | "game" | "ranking";
+  location?: "podium" | "game" | "ranking" | string;
   type?: MedalTypeProps;
 }

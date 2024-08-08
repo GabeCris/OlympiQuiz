@@ -22,7 +22,7 @@ export const Button = styled.button<ButtonProps>`
   border-radius: ${radius};
   padding: ${spacing.extra_small} ${spacing.medium};
   color: ${colors.white};
-  background-color: ${colors.black};
+  background-color: ${colors.graphite};
   min-width: 132px;
   cursor: pointer;
   height: 48px;
