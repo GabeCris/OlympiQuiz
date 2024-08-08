@@ -16,7 +16,7 @@ export const Board = styled.div`
   justify-content: center;
   align-items: center;
 
-  button{
-    margin-top: ${spacing.medium};
+  button {
+    margin-block: ${spacing.medium};
   }
 `;

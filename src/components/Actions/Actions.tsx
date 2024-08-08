@@ -7,8 +7,14 @@ import { useGameContext } from "@src/context/GameContext/GameContext";
 import { useState } from "react";
 
 const Actions = () => {
-  const { nextQuestion, removeTwoOptions, incorrectOptions, actions, setActions, showCorrectAnswer } =
-    useGameContext();
+  const {
+    nextQuestion,
+    removeTwoOptions,
+    incorrectOptions,
+    actions,
+    setActions,
+    showCorrectAnswer,
+  } = useGameContext();
 
   const handleHelpAction = (
     action: "correctAnswer" | "removeTwo" | "skipQuestion"
@@ -30,7 +36,12 @@ const Actions = () => {
   };
 
   return (
-    <S.Actions>
+    <S.Actions
+      initial={{ y: 100 }}
+      animate={{ y: 0 }}
+      exit={{ y: -100 }}
+      transition={{ duration: 0.1 }}
+    >
       <Button.Root
         disabled={actions.correctAnswer}
         onClick={() => handleHelpAction("correctAnswer")}

@@ -5,12 +5,9 @@ import { CheckIcon, UncheckIcon } from "../Icons";
 import { useGameContext } from "@src/context/GameContext/GameContext";
 import { useEffect } from "react";
 const Answer = ({ index, selected, option, correctAnswer }) => {
-  const isChecked = selected === option;
-
   const {
     incorrectOptions,
     timerStatus,
-    correctOption,
     pauseTimer,
     setGameStatus,
     gameStatus,
@@ -18,19 +15,21 @@ const Answer = ({ index, selected, option, correctAnswer }) => {
     setSelectedOption,
   } = useGameContext();
 
+  const isChecked = selectedOption === option;
+
   const isIncorrect = incorrectOptions.some((opt) => option === opt);
-  const isCorrect = correctAnswer === option;
-  const showCorrectAnswer = correctOption === option;
+  const isCorrect = correctAnswer == option;
   const { status } = timerStatus;
   const isPaused = status === "paused";
 
   const handleClick = (e) => {
-    setSelectedOption(e.target.value)
-    pauseTimer()
+    setSelectedOption(e.target.value);
+    pauseTimer();
   };
 
   return (
     <S.Label
+      whileTap={{ scale: 0.95 }}
       key={index}
       disabled={isIncorrect || (isPaused && !isCorrect)}
       unclickable={isPaused}
@@ -45,12 +44,11 @@ const Answer = ({ index, selected, option, correctAnswer }) => {
           checked={isChecked}
           onChange={(e) => handleClick(e)}
         />
-        {isChecked || showCorrectAnswer || (isPaused && isCorrect) ? (
+        {isChecked || (isPaused && isCorrect) ? (
           <CheckIcon></CheckIcon>
         ) : (
           <UncheckIcon></UncheckIcon>
         )}
-        {/* <CurrentIcon /> */}
       </S.Answer>
     </S.Label>
   );

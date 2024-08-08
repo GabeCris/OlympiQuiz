@@ -1,4 +1,3 @@
-// context/GameContext/GameContext.ts
 import { useCallback, useEffect, useState } from "react";
 import { GameContext } from "./GameContext";
 import { GameContextType } from "./GameContext.types";
@@ -39,7 +38,6 @@ export const GameProvider = ({ children }: GameContextType) => {
   const [correctOption, setCorrectOption] = useState("");
   const [timerId, setTimerId] = useState<NodeJS.Timeout | null>(null);
   const [recordScore, setRecordScore] = useState("");
-  // const [answer, setAnswer] = useState("");
 
   const isValidCompetitor = (competitor: CompetitorDataProps) => {
     return (
@@ -69,7 +67,6 @@ export const GameProvider = ({ children }: GameContextType) => {
     return sport && sportsInPortuguese[validSports.indexOf(sport)];
   };
 
-  // Função para gerar um competidor aleatório de um evento aleatório
   const getRandomCompetitor = (events: EventDataProps[]) => {
     const filteredEvents = filterEventsByKnownCountries(events);
     const validEvents = filteredEvents.filter((event) =>
@@ -86,7 +83,7 @@ export const GameProvider = ({ children }: GameContextType) => {
       (c) => isValidCompetitor(c) && isSingleCompetitor(c)
     );
 
-    if (validCompetitors.length === 0) return null; // Adicionado para tratar caso sem competidores válidos
+    if (validCompetitors.length === 0) return null;
 
     const randomCompetitor =
       validCompetitors[Math.floor(Math.random() * validCompetitors.length)];
@@ -96,7 +93,6 @@ export const GameProvider = ({ children }: GameContextType) => {
     };
   };
 
-  // Função para gerar opções incorretas de nacionalidade
   const generateIncorrectNationalityOptions = (correctCountryId: string) => {
     const options = new Set<string>();
 
@@ -111,7 +107,6 @@ export const GameProvider = ({ children }: GameContextType) => {
     return Array.from(options);
   };
 
-  // Função para gerar uma pergunta de nacionalidade
   const generateNationalityQuestion = () => {
     const filteredEvents = filterEventsByKnownCountries(eventData);
     const result = getRandomCompetitor(filteredEvents);
@@ -140,13 +135,11 @@ export const GameProvider = ({ children }: GameContextType) => {
     }
   };
 
-  // Função para gerar um placar aleatório próximo ao correto
   const generateRandomScore = (baseScore: string) => {
     const base = parseInt(baseScore);
     return (base + Math.floor(Math.random() * 5)).toString();
   };
 
-  // Função para gerar uma pergunta de placar
   const generateScoreQuestion = () => {
     const filteredEvents = filterEventsByKnownCountries(eventData);
     const validEvents = filteredEvents.filter(
@@ -163,7 +156,6 @@ export const GameProvider = ({ children }: GameContextType) => {
     options.add(correctScore);
 
     while (options.size < 4) {
-      // Inclui a resposta correta + 3 incorretas
       const option = `${generateRandomScore(
         competitor1.result_mark
       )} x ${generateRandomScore(competitor2.result_mark)}`;
@@ -184,16 +176,13 @@ export const GameProvider = ({ children }: GameContextType) => {
   const generateMedalQuestion = () => {
     if (countriesData.length === 0) return;
 
-    // Escolhe um país aleatório
     const randomCountry =
       countriesData[Math.floor(Math.random() * countriesData.length)];
 
-    // Coleta os dados de medalhas
-    const goldMedals = randomCountry.gold_medals || 0;
-    const silverMedals = randomCountry.silver_medals || 0;
-    const bronzeMedals = randomCountry.bronze_medals || 0;
+    const goldMedals = randomCountry.gold_medals ?? 0;
+    const silverMedals = randomCountry.silver_medals ?? 0;
+    const bronzeMedals = randomCountry.bronze_medals ?? 0;
 
-    // Forma uma pergunta
     const medalType = ["ouro", "prata", "bronze"][
       Math.floor(Math.random() * 3)
     ];
@@ -205,12 +194,10 @@ export const GameProvider = ({ children }: GameContextType) => {
 
     const question = `Quantas medalhas de ${medalType} ${randomCountry.name} tem?`;
 
-    // Cria opções de resposta
     const options = new Set<number>();
     options.add(correctAnswer);
 
     while (options.size < 4) {
-      // Inclui a resposta correta + 3 incorretas
       const randomMedalCount = Math.floor(Math.random() * 20);
       if (randomMedalCount !== correctAnswer) {
         options.add(randomMedalCount);
@@ -228,10 +215,12 @@ export const GameProvider = ({ children }: GameContextType) => {
     });
   };
 
-  // Função para gerar uma pergunta aleatória (nacionalidade ou placar)
   const generateRandomQuestion = () => {
-    const questionTypes = [generateNationalityQuestion, generateScoreQuestion, generateMedalQuestion];
-    // const questionTypes = [generateMedalQuestion];
+    const questionTypes = [
+      generateNationalityQuestion,
+      generateScoreQuestion,
+      generateMedalQuestion,
+    ];
     const randomQuestionType =
       questionTypes[Math.floor(Math.random() * questionTypes.length)];
     return randomQuestionType();
@@ -261,14 +250,15 @@ export const GameProvider = ({ children }: GameContextType) => {
   };
 
   const nextQuestion = () => {
+    setCorrectOption("");
     setQuestionIndex((prev) => prev + 1);
     setTimerStatus({ status: "paused" });
     setSelectedOption("");
     setIncorrectOptions([]);
-    generateRandomQuestion();
 
     setTimeout(() => {
       startTimer(10000);
+      generateRandomQuestion();
     }, 0);
   };
 
@@ -277,13 +267,11 @@ export const GameProvider = ({ children }: GameContextType) => {
     setSelectedOption("");
     setIncorrectOptions([]);
     setCorrectOption("");
-    showCorrectAnswer();
     setActions({ skipQuestion: false, removeTwo: false, correctAnswer: false });
     setTimerStatus({ status: "paused" });
     generateRandomQuestion();
     setGameStatus("active");
-    
-    generateRandomQuestion();
+
     startTimer(10000);
   };
 
@@ -300,11 +288,10 @@ export const GameProvider = ({ children }: GameContextType) => {
 
   const removeTwoOptions = () => {
     if (question.options) {
-      // Filtra opções incorretas
       const optionsToRemove = question.options
         .filter((option) => option !== question.correctAnswer)
-        .sort(() => Math.random() - 0.5) // Embaralha as opções
-        .slice(0, 2); // Pega as duas primeiras opções após o embaralhamento
+        .sort(() => Math.random() - 0.5)
+        .slice(0, 2);
 
       setIncorrectOptions(optionsToRemove);
     }

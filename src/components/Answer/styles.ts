@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { theme } from "@src/styles/theme";
+import { motion } from "framer-motion";
 
 const { colors, radius, spacing, font } = theme;
 
@@ -9,7 +10,7 @@ export const Answer = styled.div`
   align-items: center;
   width: 100%;
 `;
-export const Label = styled.label`
+export const Label = styled(motion.label)`
   width: 100%;
   border-radius: ${radius};
   background-color: ${colors.white};

@@ -39,7 +39,12 @@ const Card = ({
   };
 
   return (
-    <S.Card onClick={handleClick} color={color} {...props}>
+    <S.Card
+      whileTap={{ scale: 0.95 }}
+      onClick={handleClick}
+      color={color}
+      {...props}
+    >
       {icon && <S.Icon>{icon}</S.Icon>}
 
       {showButtons ? (

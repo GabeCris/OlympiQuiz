@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import * as S from "./styles";
 import {
   BackIcon,
@@ -15,12 +15,22 @@ import Nationality from "./Nationality";
 import Score from "./Score";
 import { useNavigate } from "react-router-dom";
 import Medal from "./Medal";
+import { useTheme } from "styled-components";
 const Question = () => {
   const { question, questionIndex, startTimer, timerStatus, recordScore } =
     useGameContext();
   const navigate = useNavigate();
 
+  const generateUniqueId = useMemo(
+    (prefix: string = "questio") => {
+      return `${prefix}-${Math.random().toString(36).substr(2, 9)}`;
+    },
+    [question]
+  );
+
   const { sport, type, gender, pictogram } = question;
+
+  const { setTheme } = useTheme();
 
   const formatQuestion = () => {
     switch (type) {
@@ -35,6 +45,12 @@ const Question = () => {
     }
   };
 
+  const questionTransition = {
+    type: "spring",
+    stiffness: 1000,
+    damping: 50,
+    duration: 0.1,
+  };
   return (
     <S.Container>
       <S.Header>
@@ -78,19 +94,26 @@ const Question = () => {
           </S.RingTimer>
         </S.Timer>
 
-        <S.Sport>
-          <Text isTitle color={Color.BLUE} fontSize={Font.MEDIUM}>
-            {sport}
-          </Text>
-          <Text
-            color={Color.BLUE}
-            fontSize={Font.EXTRA_SMALL}
-            fontWeight="regular"
-          >
-            {gender}
-          </Text>
-        </S.Sport>
-        <S.Question>{formatQuestion()}</S.Question>
+        <S.Animate
+          key={generateUniqueId}
+          initial={{ scale: 0.95 }}
+          animate={{ scale: 1 }}
+          transition={questionTransition}
+        >
+          <S.Sport>
+            <Text isTitle color={Color.BLUE} fontSize={Font.MEDIUM}>
+              {sport}
+            </Text>
+            <Text
+              color={Color.BLUE}
+              fontSize={Font.EXTRA_SMALL}
+              fontWeight="regular"
+            >
+              {gender}
+            </Text>
+          </S.Sport>
+          <S.Question>{formatQuestion()}</S.Question>
+        </S.Animate>
       </S.Content>
     </S.Container>
   );

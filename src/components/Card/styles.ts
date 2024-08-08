@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { theme } from "@src/styles/theme";
 import { CardProps } from "@src/types/types";
+import { motion } from "framer-motion";
 
 const { colors, spacing, radius } = theme;
 
@@ -13,13 +14,13 @@ export const Icon = styled.div`
   border-radius: ${radius};
 `;
 
-export const Card = styled.div<CardProps>`
+export const Card = styled(motion.div)<CardProps>`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   padding: ${spacing.small};
   width: 100%;
-  height: auto;
+  height: 66px;
   background-color: ${colors.white};
   border-radius: ${radius};
   gap: ${spacing.small};

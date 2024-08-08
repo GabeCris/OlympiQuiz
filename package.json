@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@types/styled-components": "^5.1.34",
+    "framer-motion": "^11.3.24",
+    "polished": "^4.3.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hot-toast": "^2.4.1",

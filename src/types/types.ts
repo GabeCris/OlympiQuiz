@@ -26,7 +26,7 @@ export enum Color {
 export type FontWeight = "regular" | "medium" | "bold";
 
 export interface TextProps {
-  fontSize?: Font;
+  fontSize?: Font | string;
   align?: "left" | "right" | "center";
   fontWeight?: FontWeight;
   isTitle?: boolean;

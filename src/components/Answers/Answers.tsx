@@ -48,9 +48,16 @@ const Answers = () => {
 
   return (
     <>
-      <S.Container>
+      <S.Container
+        key={JSON.stringify(options)}
+        initial={{ x: "100%" }}
+        animate={{ x: 0 }}
+        exit={{ x: "-100%" }}
+        transition={{ duration: 0.1 }}
+      >
         {options?.map((option, index) => (
           <Answer
+            key={index}
             index={optionsLetters[index]}
             option={option}
             selected={selectedOption}

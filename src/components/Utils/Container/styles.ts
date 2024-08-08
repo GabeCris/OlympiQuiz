@@ -11,7 +11,6 @@ export const Container = styled.main<ContainerProps>`
     flex-direction: column;
     align-items: center;
     gap: ${spacing.medium};
-    overflow: hidden auto;
     position: relative;
 
     &::-webkit-scrollbar{

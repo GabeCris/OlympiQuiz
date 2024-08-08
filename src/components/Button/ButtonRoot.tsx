@@ -21,11 +21,16 @@ const ButtonRoot = ({
   const navigate = useNavigate();
 
   const handleClick = () => {
-      navigateTo ? navigate(navigateTo) : action?.();
+    navigateTo ? navigate(navigateTo) : action?.();
   };
 
   return (
-    <S.Button isLink={isLink} onClick={handleClick} extended={extended} {...props}>
+    <S.Button
+      isLink={isLink}
+      onClick={handleClick}
+      extended={extended}
+      {...props}
+    >
       {children}
     </S.Button>
   );

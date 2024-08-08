@@ -6,6 +6,8 @@ import { Button } from "../Button";
 import Ranking from "../Ranking";
 import { CountryDataProps } from "@src/types/types";
 import { useGameContext } from "@src/context/GameContext/GameContext";
+import { OlympiQuizIcon } from "../Icons";
+import { motion } from "framer-motion";
 
 const MedalBoard = () => {
   const [seeAll, setSeeAll] = useState(false);
@@ -18,7 +20,7 @@ const MedalBoard = () => {
       <Button.Root isLink action={() => setSeeAll(!seeAll)}>
         <Button.Text>{seeAll ? "Ver menos" : "Ver tudo"}</Button.Text>
       </Button.Root>
-      {seeAll && <Ranking data={countriesData}></Ranking>}
+      <Ranking data={countriesData} show={seeAll}></Ranking>
     </S.Board>
   );
 };

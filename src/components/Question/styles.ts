@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled, { keyframes } from "styled-components";
 import { theme } from "@src/styles/theme";
 import { TimerProps } from "./Question";
+import { motion } from "framer-motion";
 
 export const { colors, spacing, radius } = theme;
 
@@ -29,7 +30,7 @@ export const Content = styled.div`
   align-items: center;
   gap: ${spacing.small};
   padding: ${spacing.large};
-  padding-top: 32px;
+  padding-top: 36px;
 `;
 
 export const Timer = styled.div`
@@ -143,7 +144,7 @@ export const Country = styled.div`
   }
 `;
 
-export const Question = styled.div`
+export const Question = styled(motion.div)`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -151,7 +152,7 @@ export const Question = styled.div`
 
   &:has(${Medals}) {
     ${Country} {
-      width: 80px;
+      width: auto;
     }
     gap: ${spacing.medium};
   }
@@ -173,3 +174,9 @@ export const Record = styled.div`
   right: 10px;
   position: absolute;
 `;
+
+export const Animate = styled(motion.div)`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+`

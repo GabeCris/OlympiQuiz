@@ -1,15 +1,16 @@
 import styled from "styled-components";
 import { theme } from "@src/styles/theme";
+import { motion } from "framer-motion";
 
 const { colors, spacing, radius } = theme;
 
-export const Ranking = styled.div`
+export const Ranking = styled(motion.div)`
   display: flex;
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
   gap: ${spacing.extra_small};
-  margin-block: ${spacing.large} ${spacing.small};
+  margin-bottom: ${spacing.small};
   padding-right: ${spacing.small};
   overflow-y: auto;
   width: 100%;
