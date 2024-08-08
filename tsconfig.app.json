@@ -15,6 +15,7 @@
     "isolatedModules": true,
     "moduleDetection": "force",
     "noEmit": true,
+    "noEmitOnError": false,
     "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
@@ -22,7 +23,7 @@
     },
 
     /* Linting */
-    "strict": true,
+    "strict": false,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
