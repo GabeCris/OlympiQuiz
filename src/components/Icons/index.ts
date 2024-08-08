@@ -1,0 +1,12 @@
+export { default as OlympiQuizIcon } from "./OlympiQuizIcon";
+export { default as OlympicIconWhite } from "./OlympicIconWhite";
+export { default as OlympicIcon } from "./OlympicIcon";
+export { default as RocketIcon } from "./RocketIcon";
+export { default as TrophyIcon } from "./TrophyIcon";
+export { default as TowerIcon } from "./TowerIcon";
+export { default as CalendarIcon } from "./CalendarIcon";
+export { default as BackIcon } from "./BackIcon";
+export { default as CheckIcon } from "./CheckIcon";
+export { default as UncheckIcon } from "./UncheckIcon";
+export { default as WrongIcon } from "./WrongIcon";
+export { default as ConfirmIcon } from "./ConfirmIcon";
