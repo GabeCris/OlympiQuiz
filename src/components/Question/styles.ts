@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 export const { colors, spacing, radius } = theme;
 
 export const Container = styled.div`
-  background-color: ${colors.red};
+  background-color: ${colors.blue};
   border-radius: ${radius};
   width: 100%;
   height: 165px;
