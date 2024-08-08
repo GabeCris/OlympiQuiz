@@ -16,6 +16,7 @@
     "moduleDetection": "force",
     "noEmit": true,
     "noEmitOnError": false,
+    "noImplicitAny": false,
     "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {

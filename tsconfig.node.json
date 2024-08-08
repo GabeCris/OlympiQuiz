@@ -8,7 +8,8 @@
     "allowSyntheticDefaultImports": true,
     "strict": false,
     "noEmit": true,
-    "noEmitOnError": false
+    "noEmitOnError": false,
+    "noImplicitAny": false
   },
   "include": ["vite.config.ts"]
 }
