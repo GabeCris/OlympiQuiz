@@ -54,7 +54,6 @@ export const GameProvider = ({ children }: GameContextType) => {
   };
 
   const filterEventsByKnownCountries = (events: EventDataProps[]) => {
-    console.log(events.map((c) => c.competitors.map((c) => c.country_id)));
     return events.filter((event) =>
       event.competitors.every((competitor) =>
         validCountries.includes(competitor.country_id)
@@ -72,18 +71,14 @@ export const GameProvider = ({ children }: GameContextType) => {
 
   // Função para gerar um competidor aleatório de um evento aleatório
   const getRandomCompetitor = (events: EventDataProps[]) => {
-    console.log("getRandomCompotitor");
     const filteredEvents = filterEventsByKnownCountries(events);
-    console.log(filteredEvents, "FILTERED EVENTS");
     const validEvents = filteredEvents.filter((event) =>
       event.competitors.some(
         (c) => isValidCompetitor(c) && isSingleCompetitor(c)
       )
     );
-    console.log(validEvents, "VALID EVENTS");
     const randomEvent =
       validEvents[Math.floor(Math.random() * validEvents.length)];
-    console.log(randomEvent, "RANDOM ELEMENTS");
 
     if (!randomEvent) return null;
 
@@ -258,7 +253,6 @@ export const GameProvider = ({ children }: GameContextType) => {
     }
 
     const id = setTimeout(() => {
-      console.log("ACABOU O TEMPO");
       pauseTimer();
     }, miliseconds);
 
@@ -297,7 +291,6 @@ export const GameProvider = ({ children }: GameContextType) => {
     if (!selectedOption || selectedOption != question.correctAnswer)
       setGameStatus("finished");
 
-    console.log(selectedOption, "SELECEEEEEEEEEE");
     if (timerId) {
       clearTimeout(timerId);
     }
@@ -342,22 +335,14 @@ export const GameProvider = ({ children }: GameContextType) => {
     fetchDataEvents();
     fetchDataCountries();
     setRecordScore(getRecordScore());
-    // console.log(data.map((c) => c.competitors.map((c) => c.country_id)));
-    // setEventData(data);
   }, []);
-
-  useEffect(() => {
-    console.log(selectedOption, "selected");
-  }, [selectedOption]);
 
   useEffect(() => {
     if (selectedOption && question.correctAnswer) {
       if (selectedOption == question.correctAnswer) {
-        console.log("Resposta correta!");
         setGameStatus("active");
         registerRecordScore(questionIndex);
       } else {
-        console.log("Resposta incorreta!");
         setGameStatus("finished");
         registerRecordScore(questionIndex);
       }

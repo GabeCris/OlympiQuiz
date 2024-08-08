@@ -13,8 +13,6 @@ const medalTypeTranslations: Record<string, string> = {
 const Medal = () => {
   const { question } = useGameContext();
 
-  console.log(question);
-
   const translateMedalType = (type: string) =>
     medalTypeTranslations[type] || type;
 
