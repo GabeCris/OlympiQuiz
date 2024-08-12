@@ -20,7 +20,7 @@ export const Header = styled.div`
   width: 100%;
   display: grid;
   gap: 12px;
-  grid-template-columns: 5fr 18px 18px 18px 1fr;
+  grid-template-columns: 5fr 20px 20px 20px minmax(30px, 1fr);
   padding: ${spacing.small};
   background: ${colors.white};
 
@@ -35,7 +35,7 @@ export const Card = styled.div`
   align-items: center;
   gap: 12px;
   border-radius: ${radius};
-  grid-template-columns: minmax(0, 5fr) 18px 18px 18px 1fr;
+  grid-template-columns: minmax(0, 5fr) 20px 20px 20px minmax(30px, 1fr);
   padding-inline: ${spacing.medium};
   justify-content: center;
 `;
