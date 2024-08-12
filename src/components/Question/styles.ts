@@ -1,8 +1,7 @@
-import React, { useState } from "react";
 import styled, { keyframes } from "styled-components";
 import { theme } from "@src/styles/theme";
-import { TimerProps } from "./Question";
 import { motion } from "framer-motion";
+import { TimerProps } from "@src/types/types";
 
 export const { colors, spacing, radius } = theme;
 
@@ -51,9 +50,8 @@ export const Header = styled.header`
   width: 100%;
 `;
 
-export const ringPerimeter = 2 * Math.PI * (54 / 2); // Perímetro do círculo
+export const ringPerimeter = 2 * Math.PI * (54 / 2);
 
-// Definindo a animação
 export const ringTimer = keyframes`
   from {
     stroke-dashoffset: 0;
@@ -63,7 +61,6 @@ export const ringTimer = keyframes`
   }
 `;
 
-// Estilizando o componente principal
 export const RingTimer = styled.div`
   --ring-size: 54;
   --ring-stroke-width: 8;
@@ -91,15 +88,15 @@ export const Circle = styled.circle<{ timer: TimerProps }>`
   fill: none;
   stroke-width: var(--ring-stroke-width);
   stroke: var(--ring-color);
-  stroke-dasharray: ${ringPerimeter}; // Ajustado para o comprimento total do perímetro
-  stroke-dashoffset: ${ringPerimeter}; // Começa completamente preenchido
+  stroke-dasharray: ${ringPerimeter}; 
+  stroke-dashoffset: ${ringPerimeter}; 
   animation: ${ringTimer} 10s linear;
   animation-play-state: ${(props) => props.timer.status};
 
   animation-name: ${(props) =>
     props.timer.status === "paused"
       ? "none"
-      : ringTimer}; // Usa a chave da animação do props
+      : ringTimer}; 
 `;
 
 export const TimerIcon = styled.div`

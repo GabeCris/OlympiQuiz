@@ -1,8 +1,4 @@
-import { ReactNode } from "react";
-
-interface ButtonProps {
-  children: ReactNode;
-}
+import { ButtonProps } from "./ButtonRoot";
 
 const ButtonIcon = ({ children }: ButtonProps) => {
   return <>{children}</>;

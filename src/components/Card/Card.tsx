@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { CardProps, Color, Font } from "@src/types/types";
 import Text from "../Utils/Text";
 import { TrophyIcon } from "../Icons";
-import { act, useState } from "react";
+import { useState } from "react";
 import { Button } from "../Button";
 import { useGameContext } from "@src/context/GameContext/GameContext";
 

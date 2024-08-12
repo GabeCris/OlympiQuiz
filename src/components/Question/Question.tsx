@@ -1,23 +1,20 @@
-import React, { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import * as S from "./styles";
-import {
-  BackIcon,
-  MedalsIcon,
-  OlympicIconWhite,
-  RocketIcon,
-  TrophyIcon,
-} from "../Icons";
+import { BackIcon, MedalsIcon, OlympicIconWhite, TrophyIcon } from "../Icons";
 import Text from "../Utils/Text";
 import { Color, Font } from "@src/types/types";
-import Flag from "../Flag";
 import { useGameContext } from "@src/context/GameContext/GameContext";
 import Nationality from "./Nationality";
 import Score from "./Score";
 import { useNavigate } from "react-router-dom";
 import Medal from "./Medal";
-import { useTheme } from "styled-components";
+import {
+  MedalQuestion,
+  NationalityQuestion,
+  ScoreQuestion,
+} from "@src/context/GameContext/GameContext.types";
 const Question = () => {
-  const { question, questionIndex, startTimer, timerStatus, recordScore } =
+  const { question, questionIndex, timerStatus, recordScore } =
     useGameContext();
   const navigate = useNavigate();
 
@@ -28,9 +25,10 @@ const Question = () => {
     [question]
   );
 
-  const { sport, type, gender, pictogram } = question;
-
-  const { setTheme } = useTheme();
+  const { sport, type, gender, pictogram } = question as
+    | NationalityQuestion
+    | ScoreQuestion
+    | MedalQuestion;
 
   const formatQuestion = () => {
     switch (type) {
@@ -83,13 +81,7 @@ const Question = () => {
           </S.TimerIcon>
           <S.RingTimer>
             <S.Svg>
-              <S.Circle
-                key={timerStatus}
-                timer={timerStatus}
-                cx={"50%"}
-                cy={"50%"}
-                r="27"
-              />
+              <S.Circle timer={timerStatus} cx={"50%"} cy={"50%"} r="27" />
             </S.Svg>
           </S.RingTimer>
         </S.Timer>

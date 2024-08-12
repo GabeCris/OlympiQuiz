@@ -4,10 +4,7 @@ import Podium from "../Podium";
 import { useState } from "react";
 import { Button } from "../Button";
 import Ranking from "../Ranking";
-import { CountryDataProps } from "@src/types/types";
 import { useGameContext } from "@src/context/GameContext/GameContext";
-import { OlympiQuizIcon } from "../Icons";
-import { motion } from "framer-motion";
 
 const MedalBoard = () => {
   const [seeAll, setSeeAll] = useState(false);

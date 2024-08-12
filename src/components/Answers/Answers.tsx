@@ -1,25 +1,22 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import Answer from "../Answer/Answer";
 import { Button } from "../Button";
 import { Font } from "@src/types/types";
 import * as S from "./styles";
 import Actions from "../Actions";
 import { useGameContext } from "@src/context/GameContext/GameContext";
-import { Navigate, useNavigate } from "react-router-dom";
 
 const Answers = () => {
   const optionsLetters = ["A", "B", "C", "D"];
+
   const {
-    generateRandomQuestion,
     question,
-    selectedOption,
     nextQuestion,
     timerStatus,
     gameStatus,
     resetGameData,
   } = useGameContext();
   const { options, correctAnswer } = question;
-  const navigate = useNavigate();
 
   const { status } = timerStatus;
 
@@ -60,7 +57,6 @@ const Answers = () => {
             key={index}
             index={optionsLetters[index]}
             option={option}
-            selected={selectedOption}
             correctAnswer={correctAnswer}
           />
         ))}

@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { GameContext } from "./GameContext";
-import { GameContextType } from "./GameContext.types";
+import { GameContextType, Question } from "./GameContext.types";
 import { fetchOlympicEvents } from "@src/server/fetch-events";
 import {
   CompetitorDataProps,
@@ -10,7 +10,6 @@ import {
 } from "@src/types/types";
 import {
   countriesInEnglish,
-  data,
   sportsInPortuguese,
   validCountries,
   validSports,
@@ -19,7 +18,7 @@ import { fetchCountries } from "@src/server/fetch-countries";
 export const GameProvider = ({ children }: GameContextType) => {
   const [countriesData, setCountriesData] = useState<CountryDataProps[]>([]);
   const [eventData, setEventData] = useState<EventDataProps[]>([]);
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const [selectedOption, setSelectedOption] = useState<string>("");
   const [timerStatus, setTimerStatus] = useState<TimerProps>({
     status: "paused",
   });
@@ -32,7 +31,7 @@ export const GameProvider = ({ children }: GameContextType) => {
 
   const [gameStatus, setGameStatus] = useState("active");
 
-  const [question, setQuestion] = useState({});
+  const [question, setQuestion] = useState<Question>({} as Question);
   const [questionIndex, setQuestionIndex] = useState(1);
   const [incorrectOptions, setIncorrectOptions] = useState<string[]>([]);
   const [correctOption, setCorrectOption] = useState("");
@@ -152,7 +151,7 @@ export const GameProvider = ({ children }: GameContextType) => {
 
     const correctScore = `${competitor1.result_mark} x ${competitor2.result_mark}`;
 
-    const options = new Set();
+    const options = new Set<string>();
     options.add(correctScore);
 
     while (options.size < 4) {
@@ -286,21 +285,22 @@ export const GameProvider = ({ children }: GameContextType) => {
     setTimerStatus({ status: "paused" });
   };
 
-  const removeTwoOptions = () => {
+  const removeTwoOptions = useCallback(() => {
     if (question.options) {
-      const optionsToRemove = question.options
+      const optionsToRemove: string[] = question.options
         .filter((option) => option !== question.correctAnswer)
+        .map((option) => String(option))
         .sort(() => Math.random() - 0.5)
         .slice(0, 2);
 
       setIncorrectOptions(optionsToRemove);
     }
-  };
+  }, [question.options, question.correctAnswer]);
 
-  const showCorrectAnswer = () => {
-    setSelectedOption(question.correctAnswer);
+  const showCorrectAnswer = useCallback(() => {
+    setSelectedOption(String(question.correctAnswer));
     pauseTimer();
-  };
+  }, [question.correctAnswer, pauseTimer]);
 
   const getRecordScore = () => {
     return localStorage.getItem("recordScore") ?? "0";
@@ -336,30 +336,52 @@ export const GameProvider = ({ children }: GameContextType) => {
     }
   }, [selectedOption, question.correctAnswer]);
 
-  const contextValue: GameContextType = {
-    eventData,
-    countriesData,
-    generateRandomQuestion,
-    nextQuestion,
-    question,
-    questionIndex,
-    selectedOption,
-    setSelectedOption,
-    timerStatus,
-    startTimer,
-    actions,
-    setActions,
-    incorrectOptions,
-    setIncorrectOptions,
-    removeTwoOptions,
-    showCorrectAnswer,
-    correctOption,
-    pauseTimer,
-    setGameStatus,
-    gameStatus,
-    resetGameData,
-    recordScore,
-  };
+  const contextValue = useMemo(
+    () => ({
+      eventData,
+      countriesData,
+      generateRandomQuestion,
+      nextQuestion,
+      question,
+      questionIndex,
+      selectedOption,
+      setSelectedOption,
+      timerStatus,
+      startTimer,
+      actions,
+      setActions,
+      incorrectOptions,
+      setIncorrectOptions,
+      removeTwoOptions,
+      showCorrectAnswer,
+      correctOption,
+      pauseTimer,
+      setGameStatus,
+      gameStatus,
+      resetGameData,
+      recordScore,
+    }),
+    [
+      eventData,
+      countriesData,
+      generateRandomQuestion,
+      nextQuestion,
+      question,
+      questionIndex,
+      selectedOption,
+      timerStatus,
+      startTimer,
+      actions,
+      incorrectOptions,
+      removeTwoOptions,
+      showCorrectAnswer,
+      correctOption,
+      pauseTimer,
+      gameStatus,
+      resetGameData,
+      recordScore,
+    ]
+  );
 
   return (
     <GameContext.Provider value={contextValue}>{children}</GameContext.Provider>

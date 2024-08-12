@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { theme } from "@src/styles/theme";
 import { mapFontWeight, TextProps } from "@src/types/types";
-import { motion } from "framer-motion";
 
 const { colors, spacing, radius, font } = theme;
 

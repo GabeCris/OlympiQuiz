@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { theme } from "@src/styles/theme";
 import { radius } from "../Question/styles";
 
-const { colors, spacing, breakpoints } = theme;
+const { colors, spacing } = theme;
 
 export const Header = styled.header`
   display: flex;

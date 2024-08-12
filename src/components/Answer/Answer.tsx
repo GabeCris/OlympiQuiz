@@ -3,14 +3,12 @@ import Text from "../Utils/Text";
 import * as S from "./styles";
 import { CheckIcon, UncheckIcon } from "../Icons";
 import { useGameContext } from "@src/context/GameContext/GameContext";
-import { useEffect } from "react";
-const Answer = ({ index, selected, option, correctAnswer }) => {
+const Answer = ({ index, option, correctAnswer }) => {
+
   const {
     incorrectOptions,
     timerStatus,
     pauseTimer,
-    setGameStatus,
-    gameStatus,
     selectedOption,
     setSelectedOption,
   } = useGameContext();

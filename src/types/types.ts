@@ -46,19 +46,19 @@ export interface CompetitorDataProps {
 
 export interface EventDataProps {
   id?: number;
-  day?: string; // Data no formato "YYYY-MM-DD"
+  day?: string;
   discipline_name?: string;
   discipline_pictogram?: string;
   name?: string | null;
   venue_name?: string;
   event_name?: string;
   detailed_event_name?: string;
-  start_date?: string; // Data e hora no formato "YYYY-MM-DDTHH:MM:SS+00:00"
-  end_date?: string; // Data e hora no formato "YYYY-MM-DDTHH:MM:SS+00:00"
-  status?: string; // Exemplo de status, ajuste conforme necessário
-  is_medal_event?: 0 | 1; // 0 ou 1, indicando se é um evento de medalha
-  is_live?: 0 | 1; // 0 ou 1, indicando se o evento está ao vivo
-  gender_code?: "M" | "W" | "X"; // M = Masculino, W = Feminino, X = Outros (ajuste conforme necessário)
+  start_date?: string; 
+  end_date?: string; 
+  status?: string;
+  is_medal_event?: 0 | 1; 
+  is_live?: 0 | 1; 
+  gender_code?: "M" | "W" | "X";
   competitors: CompetitorDataProps[];
 }
 export interface CountryDataProps {

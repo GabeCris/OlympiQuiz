@@ -4,13 +4,11 @@ import { Button } from "../Button";
 import NextIcon from "../Icons/NextIcon";
 import { Font } from "@src/types/types";
 import { useGameContext } from "@src/context/GameContext/GameContext";
-import { useState } from "react";
 
 const Actions = () => {
   const {
     nextQuestion,
     removeTwoOptions,
-    incorrectOptions,
     actions,
     setActions,
     showCorrectAnswer,

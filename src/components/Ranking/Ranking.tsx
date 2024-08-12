@@ -14,12 +14,12 @@ const Ranking = ({ data, show }: RankingProps) => {
     <AnimatePresence>
       {show && (
         <S.Ranking
-          initial={{ height: 0 }} // Altura inicial
-          animate={{ height: "auto" }} // Altura final
+          initial={{ height: 0 }}
+          animate={{ height: "auto" }}
           exit={{ height: 0 }}
           transition={{
-            duration: 0.5, // Duração da animação
-            ease: "easeInOut", // Tipo de easing para uma transição suave
+            duration: 0.5,
+            ease: "easeInOut", 
           }}
           layout
         >

@@ -1,6 +1,5 @@
-import { CountryDataProps } from "@src/types/types"; // Ajuste o caminho conforme necessário
+import { CountryDataProps } from "@src/types/types";
 
-// Função para buscar dados dos países
 export const fetchCountries = async (): Promise<CountryDataProps[]> => {
   console.log("Fetching countries data...");
 
