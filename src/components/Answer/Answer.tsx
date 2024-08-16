@@ -4,7 +4,6 @@ import * as S from "./styles";
 import { CheckIcon, UncheckIcon } from "../Icons";
 import { useGameContext } from "@src/context/GameContext/GameContext";
 const Answer = ({ index, option, correctAnswer }) => {
-
   const {
     incorrectOptions,
     timerStatus,
@@ -13,15 +12,16 @@ const Answer = ({ index, option, correctAnswer }) => {
     setSelectedOption,
   } = useGameContext();
 
-  const isChecked = selectedOption === option;
+  const isChecked = selectedOption == option;
 
-  const isIncorrect = incorrectOptions.some((opt) => option === opt);
+  const isIncorrect = incorrectOptions.some((opt) => option == opt);
   const isCorrect = correctAnswer == option;
   const { status } = timerStatus;
   const isPaused = status === "paused";
 
   const handleClick = (e) => {
-    setSelectedOption(e.target.value);
+    const targetValue = e.target.value;
+    setSelectedOption(targetValue.toString());
     pauseTimer();
   };
 

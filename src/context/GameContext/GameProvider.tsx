@@ -252,7 +252,7 @@ export const GameProvider = ({ children }: GameContextType) => {
     setCorrectOption("");
     setQuestionIndex((prev) => prev + 1);
     setTimerStatus({ status: "paused" });
-    setSelectedOption("");
+    setSelectedOption(null);
     setIncorrectOptions([]);
 
     setTimeout(() => {
@@ -263,7 +263,7 @@ export const GameProvider = ({ children }: GameContextType) => {
 
   const resetGameData = () => {
     setQuestionIndex(1);
-    setSelectedOption("");
+    setSelectedOption(null);
     setIncorrectOptions([]);
     setCorrectOption("");
     setActions({ skipQuestion: false, removeTwo: false, correctAnswer: false });
@@ -325,7 +325,7 @@ export const GameProvider = ({ children }: GameContextType) => {
   }, []);
 
   useEffect(() => {
-    if (selectedOption && question.correctAnswer) {
+    if (selectedOption != null && question.correctAnswer) {
       if (selectedOption == question.correctAnswer) {
         setGameStatus("active");
         registerRecordScore(questionIndex);
